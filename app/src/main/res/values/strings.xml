@@ -12,7 +12,11 @@
         <item>Neptune</item>
     </string-array>
 
+<<<<<<< HEAD
    <string name="gender">
+=======
+    <string name="gender">
+>>>>>>> new activity is created
         <item>-Select-</item>
    </string>
 
