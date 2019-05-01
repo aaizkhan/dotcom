@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 
     ArrayList<String> chategories=new ArrayList<>();
     ArrayList<String> nodes=new ArrayList<>();
- 
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
