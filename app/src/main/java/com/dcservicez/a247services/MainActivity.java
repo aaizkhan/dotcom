@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getvies();
 
-        // Write a message to the database
+        // Write a message to the database here im again
         FirebaseApp.initializeApp(this);
          FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference categories_ref = database.getReference("categories");
