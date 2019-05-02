@@ -1,6 +1,7 @@
 package com.dcservicez.a247services;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getvies();
+
+
 
         // Write a message to the database here im again
      /*   FirebaseApp.initializeApp(this);
@@ -138,5 +141,11 @@ public class MainActivity extends Activity {
 
         }
 
+    }
+
+    public void back_signUp(View view) {
+        Intent intent=new Intent(MainActivity.this,SignIn.class);
+        startActivity(intent);
+        finish();
     }
 }
