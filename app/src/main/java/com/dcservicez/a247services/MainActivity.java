@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,11 +23,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    EditText fullName,mobileNo,email,password,confirmPassword;
+    EditText fullName, mobileNo, email, pass, Cpassword;
     Spinner spinner;
+    RadioGroup radioSp;
 
-    ArrayList<String> chategories=new ArrayList<>();
-    ArrayList<String> nodes=new ArrayList<>();
+  //  ArrayList<String> chategories = new ArrayList<>();
+  //  ArrayList<String> nodes = new ArrayList<>();
 
 
     @Override
@@ -36,25 +38,26 @@ public class MainActivity extends Activity {
         getvies();
 
         // Write a message to the database here im again
-        FirebaseApp.initializeApp(this);
-         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference categories_ref = database.getReference("categories");
+     /*   FirebaseApp.initializeApp(this);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference categories_ref = database.getReference("Users");
+
         categories_ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     chategories.add(snapshot.getValue().toString());
                     nodes.add(snapshot.getKey().toString());
                 }
 
-                final int size=chategories.size();
-                String[] temp_strings=new String[size];
+                final int size = chategories.size();
+                String[] temp_strings = new String[size];
 
-                for(int i=0;i<size;i++){
-                    temp_strings[i]=chategories.get(i);
+                for (int i = 0; i < size; i++) {
+                    temp_strings[i] = chategories.get(i);
                 }
 
-                Toast.makeText(MainActivity.this,"nodes_size"+size,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "nodes_size" + size, Toast.LENGTH_SHORT).show();
 
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -75,9 +78,6 @@ public class MainActivity extends Activity {
         });
 
 
-
-
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -90,36 +90,53 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
-
-    void listiners(){
-
-    }
-    void getvies(){
-        fullName=(EditText)findViewById(R.id.edt_fullName);
-        mobileNo=(EditText)findViewById(R.id.edt_mobile);
-        spinner=(Spinner) findViewById(R.id.spn_gender);
-    }
-
-    void register_user(int i,String name,String phone){
-        DatabaseReference firebaseDatabase=FirebaseDatabase.getInstance().getReference("service_provider").child(nodes.get(i));
-        String key=firebaseDatabase.push().getKey();
-
-        firebaseDatabase.child(key).child("name").setValue(name);
-        firebaseDatabase.child(key).child("phone").setValue(phone);
+        */
 
 
     }
 
-    public void register_click(View view){
+
+    void listiners() {
+
+    }
+
+    void getvies() {
+        fullName = (EditText) findViewById(R.id.edt_fullName);
+        mobileNo = (EditText) findViewById(R.id.edt_mobile);
+        email = (EditText) findViewById(R.id.edt_email);
+        pass = (EditText) findViewById(R.id.edt_pass);
+        Cpassword = (EditText) findViewById(R.id.confirm_password);
+        spinner = (Spinner) findViewById(R.id.spn_gender);
+        radioSp = (RadioGroup) findViewById(R.id.radio_sp);
+    }
+
+
+    public void register(String fullname, String mobile, String email, String pass, String CPassword) {
+
+        int i = 0;
+
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users");
+        String key = firebaseDatabase.push().getKey();
+
+
+        firebaseDatabase.child(key).child("fullname").setValue(fullname);
+        firebaseDatabase.child(key).child("mobile no").setValue(mobile);
+        firebaseDatabase.child(key).child("Email").setValue(email);
+        firebaseDatabase.child(key).child("password").setValue(pass);
+        firebaseDatabase.child(key).child("confirmPassword").setValue(CPassword);
+
+
+    }
+
+    public void SignUp(View view) {
 
         try {
 
-            register_user(spinner.getSelectedItemPosition(),fullName.getText().toString(),mobileNo.getText().toString());
-        }catch (Exception e){
-            Toast.makeText(MainActivity.this,e.toString(),Toast.LENGTH_SHORT).show();
-        }
+            register(fullName.getText().toString(), mobileNo.getText().toString(), email.getText().toString(), pass.getText().toString(), Cpassword.getText().toString());
+        } catch (Exception e) {
+            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
 
+        }
 
     }
 }
