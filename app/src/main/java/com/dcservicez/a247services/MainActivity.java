@@ -1,7 +1,10 @@
 package com.dcservicez.a247services;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +19,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.dcservicez.a247services.Extras.View_Mnagae;
+import com.dcservicez.a247services.Notifiers.Dilouges;
 import com.dcservicez.a247services.debugs.Debug;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,11 +38,12 @@ public class MainActivity extends Activity {
      Spinner spinner_gndr;
     private  RadioGroup radioSp;
     private Context context;
-    RadioButton rd_btn;
+    RadioButton rd_btn,rd_btn2;
 
     Debug debug;
 
     String srvc,srvc_exp,srvc_des;
+    Dilouges dilouges;
 
   //  ArrayList<String> chategories = new ArrayList<>();
   //  ArrayList<String> nodes = new ArrayList<>();
@@ -50,6 +57,7 @@ public class MainActivity extends Activity {
         context=this;
         fill_genders();
         debug=new Debug(context);
+        dilouges=new Dilouges(context);
         listiners();
 
 
@@ -167,26 +175,76 @@ public class MainActivity extends Activity {
         spinner_gndr = (Spinner) findViewById(R.id.spn_gender);
         radioSp = (RadioGroup) findViewById(R.id.radio_sp);
          rd_btn=(RadioButton)findViewById(R.id.radioBtn_yes);
+         rd_btn2=(RadioButton)findViewById(R.id.radioBtn_No);
     }
 
 
-    public void register_srvc(boolean isService) {
+    public void register_srvc(boolean isService,final View view) {
 
 
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(srvc);
-        String key = firebaseDatabase.push().getKey();
+        final AlertDialog builder=new ProgressDialog.Builder(context)
+                .setCancelable(false)
+                .setTitle("Registration")
+                .setMessage("wait..").create();
+        builder.show();
+        view.setEnabled(false);
 
 
-        firebaseDatabase.child(key).child("fullname").setValue(fullName.getText().toString());
-        firebaseDatabase.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
-        firebaseDatabase.child(key).child("Email").setValue(email.getText().toString());
-        firebaseDatabase.child(key).child("password").setValue(pass.getText().toString());
-        firebaseDatabase.child(key).child("service_des").setValue(srvc_des);
-        firebaseDatabase.child(key).child("service_exp").setValue(srvc_exp);
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users");
+
+        if(isService) {
+            builder.setMessage("Registration as service provider");
+            DatabaseReference ref=firebaseDatabase.child(srvc);
+            String key =  ref.push().getKey();
+            ref.child(key).child("fullname").setValue(fullName.getText().toString());
+            ref.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
+            ref.child(key).child("Email").setValue(email.getText().toString());
+            ref.child(key).child("password").setValue(pass.getText().toString());
+            ref.child(key).child("service_des").setValue(srvc_des);
+            ref.child(key).child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    view.setEnabled(false);
+                    builder.hide();
+
+
+                    dilouges.complition_dilouge("Registration is success", "You have completed registration as servive provider", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ((Activity)context).finish();
+                        }
+                    }).show();
+                }
+            });
+        }else {
+            builder.setMessage("Registration as service user");
+            String key =  firebaseDatabase.push().getKey();
+            firebaseDatabase.child(key).child("fullname").setValue(fullName.getText().toString());
+            firebaseDatabase.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
+            firebaseDatabase.child(key).child("Email").setValue(email.getText().toString());
+            firebaseDatabase.child(key).child("password").setValue(pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    view.setEnabled(false);
+                    builder.hide();
+
+                    dilouges.complition_dilouge("Registration is success", "You have completed registration as service user", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ((Activity)context).finish();
+                        }
+                    }).show();
+
+                }
+            });
+        }
+
 
 
 
     }
+
+
 
     boolean isValid(){
 
@@ -196,6 +254,7 @@ public class MainActivity extends Activity {
         viewMnagae.remove_error(email);
         viewMnagae.remove_error(pass);
         viewMnagae.remove_error(Cpassword);
+
 
         if(fullName.getText().toString().isEmpty()){
             fullName.setError("Enter your name here ");
@@ -221,6 +280,12 @@ public class MainActivity extends Activity {
             return false;
         }
 
+
+        if((!rd_btn.isChecked() && !rd_btn2.isChecked())){
+            Toast.makeText(context,"Chose a registration type",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
         return true;
 
 
@@ -233,15 +298,15 @@ public class MainActivity extends Activity {
 
         try {
 
-            if(true){//isValid()){
+            if(isValid()){
                 //now check if service provider or not
 
                 if(rd_btn.isChecked()){
                     ///go for sp
 //                startActivityForResult(new Intent(context,Signup_sp.class),9233);
-                    register_srvc(true);
+                    register_srvc(true,view);
                 }else{
-                    register_srvc(false);
+                    register_srvc(false,view);
 
                 }
             }
