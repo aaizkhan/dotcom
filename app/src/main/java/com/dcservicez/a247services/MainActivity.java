@@ -166,6 +166,8 @@ public class MainActivity extends Activity {
 
     }
 
+
+
     void getvies() {
         fullName = (EditText) findViewById(R.id.edt_fullName);
         mobileNo = (EditText) findViewById(R.id.edt_mobile);
@@ -190,16 +192,19 @@ public class MainActivity extends Activity {
         view.setEnabled(false);
 
 
+
         DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users");
 
         if(isService) {
             builder.setMessage("Registration as service provider");
-            DatabaseReference ref=firebaseDatabase.child(srvc);
-            String key =  ref.push().getKey();
+            DatabaseReference ref=firebaseDatabase.getRef();
+            String key =  email.getText().toString().replace(".", ",");
+
             ref.child(key).child("fullname").setValue(fullName.getText().toString());
             ref.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
-            ref.child(key).child("Email").setValue(email.getText().toString());
+//            ref.child(key).child("Email").setValue(email.getText().toString());
             ref.child(key).child("password").setValue(pass.getText().toString());
+            ref.child(key).child("service").setValue(srvc);
             ref.child(key).child("service_des").setValue(srvc_des);
             ref.child(key).child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -211,6 +216,7 @@ public class MainActivity extends Activity {
                     dilouges.complition_dilouge("Registration is success", "You have completed registration as servive provider", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(context,SignIn.class));
                             ((Activity)context).finish();
                         }
                     }).show();
@@ -218,10 +224,10 @@ public class MainActivity extends Activity {
             });
         }else {
             builder.setMessage("Registration as service user");
-            String key =  firebaseDatabase.push().getKey();
+            String key =  email.getText().toString().replace(".", ","); // firebaseDatabase.push().getKey();
             firebaseDatabase.child(key).child("fullname").setValue(fullName.getText().toString());
             firebaseDatabase.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
-            firebaseDatabase.child(key).child("Email").setValue(email.getText().toString());
+//            firebaseDatabase.child(key).child("Email").setValue(email.getText().toString());
             firebaseDatabase.child(key).child("password").setValue(pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -231,6 +237,7 @@ public class MainActivity extends Activity {
                     dilouges.complition_dilouge("Registration is success", "You have completed registration as service user", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            startActivity(new Intent(context,SignIn.class));
                             ((Activity)context).finish();
                         }
                     }).show();
@@ -297,6 +304,7 @@ public class MainActivity extends Activity {
 
 
         try {
+
 
             if(isValid()){
                 //now check if service provider or not

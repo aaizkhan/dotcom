@@ -1,6 +1,7 @@
 package com.dcservicez.a247services.Notifiers;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
@@ -16,7 +17,17 @@ public class Dilouges {
                 .setTitle(title)
                 .setMessage(msg)
                 .setCancelable(false)
-                .setPositiveButton("Ok",listener);
+         .setPositiveButton("Ok",listener);
+
+        return builder.create();
+    }
+
+    public AlertDialog prograss(String title, String msg, DialogInterface.OnClickListener listener){
+        ProgressDialog.Builder builder=new ProgressDialog.Builder(context)
+                .setTitle(title)
+                .setMessage(msg)
+                .setCancelable(false);
+
         return builder.create();
     }
 }
