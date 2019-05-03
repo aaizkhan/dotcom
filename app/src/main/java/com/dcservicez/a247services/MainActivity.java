@@ -2,34 +2,33 @@ package com.dcservicez.a247services;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
     EditText fullName, mobileNo, email, pass, Cpassword;
-    Spinner spinner;
+    Spinner spn_gender;
     RadioGroup radioSp;
+    String item;
+    String spCondition;
 
-  //  ArrayList<String> chategories = new ArrayList<>();
-  //  ArrayList<String> nodes = new ArrayList<>();
+       ArrayList<String> chategories = new ArrayList<>();
+        ArrayList<String> nodes = new ArrayList<>();
+
+    String[] items = new String[] {"-Select-","Male", "Female","Other"};
 
 
     @Override
@@ -38,12 +37,58 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getvies();
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_gender.setAdapter(adapter);
+
+
+        spn_gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                if (parent.getItemAtPosition(position)=="-Select-"){
+                    return;
+                }else if (parent.getItemAtPosition(position)=="Male"){
+
+                    item = parent.getItemAtPosition(position).toString();
+
+                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                    return;
+                }else if (parent.getItemAtPosition(position)=="Female"){
+
+                    item = parent.getItemAtPosition(position).toString();
+
+                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                    return;
+                }else if (parent.getItemAtPosition(position)=="Other"){
+
+                    item = parent.getItemAtPosition(position).toString();
+
+                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
 
 
         // Write a message to the database here im again
-     /*   FirebaseApp.initializeApp(this);
+ /*       FirebaseApp.initializeApp(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference categories_ref = database.getReference("Users");
+        final DatabaseReference categories_ref = database.getReference("Catogery");
 
         categories_ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -92,8 +137,8 @@ public class MainActivity extends Activity {
 
             }
         });
+       */
 
-        */
 
 
     }
@@ -109,7 +154,7 @@ public class MainActivity extends Activity {
         email = (EditText) findViewById(R.id.edt_email);
         pass = (EditText) findViewById(R.id.edt_pass);
         Cpassword = (EditText) findViewById(R.id.confirm_password);
-        spinner = (Spinner) findViewById(R.id.spn_gender);
+        spn_gender = (Spinner) findViewById(R.id.spn_gender);
         radioSp = (RadioGroup) findViewById(R.id.radio_sp);
     }
 
@@ -127,25 +172,36 @@ public class MainActivity extends Activity {
         firebaseDatabase.child(key).child("Email").setValue(email);
         firebaseDatabase.child(key).child("password").setValue(pass);
         firebaseDatabase.child(key).child("confirmPassword").setValue(CPassword);
+        firebaseDatabase.child(key).child("Gender").setValue(item);
+       // firebaseDatabase.child(key).child("Gender").
 
 
     }
 
     public void SignUp(View view) {
 
-        try {
 
-            register(fullName.getText().toString(), mobileNo.getText().toString(), email.getText().toString(), pass.getText().toString(), Cpassword.getText().toString());
-        } catch (Exception e) {
-            Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
 
+
+
+            try {
+
+                register(fullName.getText().toString(), mobileNo.getText().toString(), email.getText().toString(), pass.getText().toString(), Cpassword.getText().toString());
+            } catch (Exception e) {
+                Toast.makeText(MainActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+
+            }
         }
 
-    }
+
 
     public void back_signUp(View view) {
         Intent intent=new Intent(MainActivity.this,SignIn.class);
         startActivity(intent);
         finish();
     }
+
+
+
 }
+

@@ -123,11 +123,13 @@
 
             <Spinner
                 android:id="@+id/spn_gender"
-                android:layout_width="match_parent"
+                android:layout_width="130dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp"
+
+                android:gravity="center"
                 android:background="@drawable/spinner_bg"
 
                 >
@@ -172,6 +174,7 @@
             android:id="@+id/radio_sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="check_serviceProvider"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal"
             android:layout_marginTop="2dp"
