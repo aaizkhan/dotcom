@@ -48,7 +48,7 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spn_gender"
+            android:id="@+id/spn_services"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
@@ -99,9 +99,9 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/signup_btn"
         android:fontFamily="sans-serif-black"
-
+        android:onClick="ok_clicked"
         android:gravity="center"
-        android:text="Finish"
+        android:text="Ok"
         android:textAllCaps="false"/>
     <Button
         android:id="@+id/btn_sp_back"

@@ -4,4 +4,10 @@
 
     <string name="button_name"><u>Sign Up</u></string>
 
+    <array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </array>
+
 </resources>
