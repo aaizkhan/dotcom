@@ -27,6 +27,7 @@ public class View_Mnagae {
             @Override
             public void afterTextChanged(Editable editable) {
 
+
             }
         });
     }
