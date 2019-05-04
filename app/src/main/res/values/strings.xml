@@ -3,5 +3,6 @@
 
 
     <string name="button_name"><u>Sign Up</u></string>
+    <string name="title_activity_search_service">Map</string>
 
 </resources>
