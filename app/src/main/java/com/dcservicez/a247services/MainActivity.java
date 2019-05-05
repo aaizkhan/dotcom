@@ -61,63 +61,6 @@ public class MainActivity extends Activity {
         listiners();
 
 
-
-        // Write a message to the database here im again
-     /*   FirebaseApp.initializeApp(this);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference categories_ref = database.getReference("Users");
-
-        categories_ref.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    chategories.add(snapshot.getValue().toString());
-                    nodes.add(snapshot.getKey().toString());
-                }
-
-                final int size = chategories.size();
-                String[] temp_strings = new String[size];
-
-                for (int i = 0; i < size; i++) {
-                    temp_strings[i] = chategories.get(i);
-                }
-
-                Toast.makeText(MainActivity.this, "nodes_size" + size, Toast.LENGTH_SHORT).show();
-
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                        MainActivity.this, android.R.layout.simple_spinner_item, temp_strings);
-
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-//        Spinner sItems = (Spinner) findViewById(R.id.spinner);
-                spinner.setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this,chategories.get(position),Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        */
-
-
     }
 
 
