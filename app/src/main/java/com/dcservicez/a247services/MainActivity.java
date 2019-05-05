@@ -269,8 +269,8 @@ public class MainActivity extends Activity {
     }
 
     public void back_signUp(View view) {
-        Intent intent=new Intent(MainActivity.this,SignIn.class);
-        startActivity(intent);
+//        Intent intent=new Intent(MainActivity.this,SignIn.class);
+//        startActivity(intent);
         finish();
     }
 }
