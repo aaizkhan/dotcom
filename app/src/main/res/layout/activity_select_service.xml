@@ -1,50 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EDF1F8"
-    android:orientation="horizontal"
-    tools:context=".Select_service">
+    tools:context=".Select_service"
+    android:orientation="vertical">
 
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="horizontal"
-       >
-         <ImageButton
-             android:scaleType="center"
-                android:padding="20dp"
-             android:src="@drawable/menu"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:background="@android:color/transparent"/>
-         <EditText
-             android:textSize="30dp"
-             android:textColor="@android:color/white"
-             android:padding="20dp"
-             android:background="@drawable/search_style"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:hint="Search"/>
-
-     </LinearLayout>
-
-
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
 
-    </ScrollView>
+        >
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:padding="20dp"
+            android:scaleType="center"
+            android:src="@drawable/menu" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/search_style"
+            android:hint="Search"
+            android:padding="20dp"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
+
+    </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/liearFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -90,8 +85,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/plumber"
-                android:layout_marginTop="50dp" />
+                android:layout_marginTop="50dp"
+                android:src="@drawable/plumber" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -111,7 +106,6 @@
         android:id="@+id/linearSecond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/liearFirst"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -157,8 +151,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/paintroller"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="50dp"
+                android:src="@drawable/paintroller" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -177,7 +171,6 @@
 
     <LinearLayout
         android:id="@+id/liear3"
-        android:layout_below="@id/linearSecond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -225,8 +218,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/briefcase"
-                android:layout_marginTop="50dp" />
+                android:layout_marginTop="50dp"
+                android:src="@drawable/briefcase" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -243,5 +236,4 @@
     </LinearLayout>
 
 
-
-</RelativeLayout>
+</LinearLayout>

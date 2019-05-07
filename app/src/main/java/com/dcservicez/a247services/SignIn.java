@@ -35,6 +35,9 @@ public class SignIn extends AppCompatActivity {
         context=this;
         dilouges=new Dilouges(context);
         prefs=new Prefs(context);
+        Intent intent=new Intent(SignIn.this,Select_service.class);
+        startActivity(intent);
+        finish();
 
     }
 

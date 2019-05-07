@@ -126,7 +126,7 @@
             <Spinner
                 android:id="@+id/spn_gender"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="5dp"
