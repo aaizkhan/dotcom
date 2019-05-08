@@ -42,7 +42,7 @@ public class Signup_sp extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference categories_ref = database.getReference("services");
+        final DatabaseReference categories_ref = database.getReference("app_config").child("services");
 
         categories_ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -50,7 +50,7 @@ public class Signup_sp extends AppCompatActivity {
                 for (DataSnapshot data:dataSnapshot.getChildren()) {
                     HashMap<String,String> service = new HashMap<>();
 
-                    service.put(data.getKey(),data.getValue().toString());
+                    service.put(data.getKey(),data.child("title").getValue().toString());
                     services.add(service);
 
                 }
@@ -84,7 +84,7 @@ public class Signup_sp extends AppCompatActivity {
 
       try {
           Intent intent=new Intent();
-          intent.putExtra("svrc",services.get(spinner.getSelectedItemPosition()).values().toString().replace("[","").replace("]",""));
+          intent.putExtra("svrc",services.get(spinner.getSelectedItemPosition()).keySet().toString().replace("[","").replace("]",""));
           intent.putExtra("svrc_exp",edt_desc.getText().toString());
           intent.putExtra("svrc_desc",edt_exp.getText().toString());
           setResult(92333,intent);

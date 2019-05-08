@@ -147,9 +147,9 @@ public class MainActivity extends Activity {
             ref.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
 //            ref.child(key).child("Email").setValue(email.getText().toString());
             ref.child(key).child("password").setValue(pass.getText().toString());
-            ref.child(key).child("service").setValue(srvc);
-            ref.child(key).child("service_des").setValue(srvc_des);
-            ref.child(key).child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
+            ref.child(key).child("service").child("title").setValue(srvc);
+            ref.child(key).child("service").child("service_des").setValue(srvc_des);
+            ref.child(key).child("service").child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     view.setEnabled(false);
@@ -167,6 +167,7 @@ public class MainActivity extends Activity {
             });
         }else {
             builder.setMessage("Registration as service user");
+
             String key =  email.getText().toString().replace(".", ","); // firebaseDatabase.push().getKey();
             firebaseDatabase.child(key).child("fullname").setValue(fullName.getText().toString());
             firebaseDatabase.child(key).child("mobile_no").setValue(mobileNo.getText().toString());

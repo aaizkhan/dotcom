@@ -38,6 +38,7 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     private GoogleMap mMap;
     Debug debug;
     Prefs prefs;
+    String service_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,10 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
         mapFragment.getMapAsync(this);
         debug=new Debug(this);
         prefs=new Prefs(this);
+        if(getIntent()!=null){
+            service_type=getIntent().getExtras().getString("service_type");
+
+        }
 
 
 
@@ -112,26 +117,32 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     }
 
     public void check_service_near_me(Location location,final String service_type){
-        final DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Users").child("service_provider_location");
+        final DatabaseReference ref= FirebaseDatabase.getInstance().getReference("Users").child("service_provider_location").child(service_type);
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot data:dataSnapshot.getChildren()) {
-                        ref.child(data.getKey().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for (DataSnapshot data2:dataSnapshot.getChildren()) {
-                                    BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.service);
 
-                                    mMap.addMarker(new MarkerOptions().title(data.getKey().toString()+data2.getKey().toString()).position(new LatLng(Float.parseFloat(data2.child("Latitude").getValue().toString()),Float.parseFloat(data2.child("Longitude").getValue().toString()))));
-                                }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                    BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.service);
+                    mMap.addMarker(new MarkerOptions().title(data.getKey().toString()).position(new LatLng(Float.parseFloat(data.child("Latitude").getValue().toString()),Float.parseFloat(data.child("Longitude").getValue().toString()))));
 
-                            }
-                        });
+
+//                    ref.child(data.getKey().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                for (DataSnapshot data2:dataSnapshot.getChildren()) {
+//
+//
+//
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                            }
+//                        });
                 }
             }
 
@@ -158,7 +169,7 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     }
     public void update_location(Location location){
         if(prefs.sverc_type().isEmpty()){
-            check_service_near_me(location,"Cleaner");
+            check_service_near_me(location,service_type);
             return;
 
         }
