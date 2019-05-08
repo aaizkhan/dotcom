@@ -36,7 +36,8 @@ public class SignIn extends AppCompatActivity {
         dilouges=new Dilouges(context);
         prefs=new Prefs(context);
 
-        Intent intent=new Intent(SignIn.this,Change_profile_pic.class);
+
+        Intent intent=new Intent(SignIn.this,Sp_Profile.class);
         startActivity(intent);
         finish();
 

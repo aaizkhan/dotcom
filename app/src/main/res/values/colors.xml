@@ -24,4 +24,13 @@
 
     <color name="your_color">#9197A0</color>
 
+    <color name="orange">#ed8a19</color>
+    <color name="gray">#707070</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="indigo">#9932CC</color>
+    <color name="pink">#FF69B4</color>
+
 </resources>

@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Change_profile_pic"></activity>
+        <activity android:name=".Customer_menu"></activity>
+        <activity android:name=".Sp_Profile" />
+        <activity android:name=".Change_profile_pic" />
         <activity android:name=".Account_Managment" />
         <activity android:name=".Select_service" />
         <!--
