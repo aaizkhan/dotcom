@@ -46,7 +46,7 @@ public class Services_Adopter extends  RecyclerView.Adapter<Services_Adopter.Vie
         View view;
         view= LayoutInflater.from(context).inflate(R.layout.service_item,parent,false);
 
-        Log.i("service24/7_Adopter","created");
+//        Log.i("service24/7_Adopter","created");
         return new ViewHolder(view);
     }
 
@@ -72,12 +72,12 @@ public class Services_Adopter extends  RecyclerView.Adapter<Services_Adopter.Vie
                 i.putExtra("service_type",service.getService());
                 context.startActivity(i);
 
-                Log.i("service24/7_Adopter","select service"+service.getService());
+//                Log.i("service24/7_Adopter","select service"+service.getService());
             }
         });
 
 
-        Log.i("service24/7_Adopter","bind"+position);
+//        Log.i("service24/7_Adopter","bind"+position);
 
     }
 

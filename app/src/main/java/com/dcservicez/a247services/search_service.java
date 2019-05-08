@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -24,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -32,6 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
+
+import java.io.IOException;
 
 public class search_service extends FragmentActivity implements OnMapReadyCallback {
 
@@ -86,13 +95,23 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.getUiSettings().setRotateGesturesEnabled(false);
 
         // Add a marker in Sydney and move the camera
 
 //        mMap.getMyLocation();
                 mMap.setMyLocationEnabled(true);
+
+
                 Location l=getMyLocation();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(l.getLatitude(),l.getLongitude())));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(l.getLatitude(), l.getLongitude()), 11));
+
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(l.getLatitude(), l.getLongitude()))      // Sets the center of the map to location user
+                .zoom(13)                   // Sets the zoom
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 
 
 //        mMap.setMaxZoomPreference(50.0f);
@@ -122,10 +141,58 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot data:dataSnapshot.getChildren()) {
+                    Log.i("Search_Service",data.getKey().toString());
+                    FirebaseDatabase.getInstance().getReference("Users").child(data.getKey().toString()).child("profile_url").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            ;
+
+                            Log.i("Search_Service",dataSnapshot.getValue().toString());
 
 
-                    BitmapDescriptor icon = BitmapDescriptorFactory.fromResource(R.drawable.service);
-                    mMap.addMarker(new MarkerOptions().title(data.getKey().toString()).position(new LatLng(Float.parseFloat(data.child("Latitude").getValue().toString()),Float.parseFloat(data.child("Longitude").getValue().toString()))));
+
+                            Transformation transformation = new RoundedTransformationBuilder()
+                                    .borderColor(Color.parseColor("#6776c0ff"))
+                                    .borderWidthDp(10)
+                                    .cornerRadiusDp(30)
+                                    .oval(false)
+                                    .build();
+
+
+
+
+
+
+
+                                Picasso.get().load(dataSnapshot.getValue().toString()).resize(110,110).centerCrop().transform(transformation).into(new Target() {
+                                    @Override
+                                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                       BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(bitmap);
+                                        mMap.addMarker(new MarkerOptions().icon(icon).title(data.getKey().toString()).position(new LatLng(Float.parseFloat(data.child("Latitude").getValue().toString()),Float.parseFloat(data.child("Longitude").getValue().toString()))));
+
+                                    }
+
+                                    @Override
+                                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+                                    }
+
+                                    @Override
+                                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                                    }
+                                });
+
+
+
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.i("dataabse get error",databaseError.toString());
+                        }
+                    });
 
 
 //                    ref.child(data.getKey().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
