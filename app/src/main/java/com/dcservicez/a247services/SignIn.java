@@ -37,7 +37,7 @@ public class SignIn extends AppCompatActivity {
         prefs=new Prefs(context);
 
 
-        Intent intent=new Intent(SignIn.this,Sp_Profile.class);
+        Intent intent=new Intent(SignIn.this,Customer_menu.class);
         startActivity(intent);
         finish();
 
