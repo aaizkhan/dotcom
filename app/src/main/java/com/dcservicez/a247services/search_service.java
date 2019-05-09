@@ -3,6 +3,7 @@ package com.dcservicez.a247services;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +30,7 @@ import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -114,6 +116,16 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Log.i("srarch_activity",marker.getTitle());
+                Intent i=new Intent(search_service.this,Sp_Profile.class);
+                i.putExtra("user_id",marker.getTitle());
+                startActivity(i);
+                return false;
+            }
+        });
 
 //        mMap.setMaxZoomPreference(50.0f);
 

@@ -34,16 +34,29 @@
             android:onClick="btnBack_account_mgt"
             android:background="@android:color/transparent"/>
 
-        <ImageView
-            android:id="@+id/sp_service_pic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/untitled" />
+       <LinearLayout
+            android:gravity="center"
+           android:layout_marginTop="20dp"
+           android:layout_alignParentRight="true"
+           android:layout_alignParentTop="true"
+           android:layout_marginEnd="10dp"
+           android:orientation="vertical"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+           <ImageView
+               android:layout_height="30dp"
+               android:id="@+id/sp_service_pic"
+               android:layout_width="30dp"
 
+               android:src="@drawable/carpenter" />
+           <TextView
+               android:id="@+id/sp_service_title"
+               android:textStyle="bold"
+               android:text="Carpenter"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+
+       </LinearLayout>
 
     </RelativeLayout>
 
@@ -61,20 +74,13 @@
         android:layout_centerHorizontal="true"
 
         />
-    <ScrollView
-        android:layout_below="@id/sp_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ScrollView">
 
 
-    <LinearLayout
-        android:layout_below="@id/yourCircularImageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+
+
 
         <LinearLayout
+            android:layout_marginTop="35dp"
         android:id="@+id/linear_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,6 +90,7 @@
         android:layout_below="@id/relative_profile_img">
 
         <TextView
+
             android:id="@+id/sp_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,350 +168,11 @@
         android:textStyle="bold"
         android:gravity="center"/>
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/txtview_reviews"
+        android:id="@+id/review1_recylerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
-        android:id="@+id/linear_review_1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-                android:id="@+id/review1_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/txtview_review_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtview_review_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/review1_ratingTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear_review_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="5dp"
-        >
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="5dp"
-            >
-
-            <LinearLayout
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#95E0E5F1"
-                android:orientation="horizontal">
-
-
-
-                <com.mikhaellopez.circularimageview.CircularImageView
-
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/ic_launcher_background"
-                    app:civ_border_color="#EEEEEE"
-                    app:civ_border_width="1dp"
-                    app:civ_shadow="true"
-                    app:civ_shadow_radius="0"
-                    android:layout_marginTop="14dp"
-                    app:civ_shadow_color="#8BC34A"
-                    android:layout_marginStart="10dp"
-                    />
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="10dp"
-                        android:text="Aaiz Khan"
-                        android:textColor="#925AB9"
-                        android:textSize="22dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Good Experience and Fast Service"
-                        android:textColor="#707070"
-                        android:textSize="18dp" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="4dp"
-                    android:text="5"
-                    android:textColor="#FF8C00"
-                    android:textSize="25dp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/starfill_2" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-    </LinearLayout>
-
-
-
-
-    </LinearLayout>
-    </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-        <Button
-            android:onClick="btn_about_sp"
-            android:layout_weight="1"
-            android:text="About"
-            android:textSize="19dp"
-            android:textAllCaps="false"
-            android:background="#707070"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
-        <Button
-            android:onClick="bnt_contact_sp"
-            android:layout_weight="1"
-            android:background="#6776c0"
-            android:textSize="19dp"
-            android:text="Contact"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"/>
-
-    </LinearLayout>
 
 </RelativeLayout>

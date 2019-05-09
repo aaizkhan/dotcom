@@ -147,8 +147,10 @@ public class MainActivity extends Activity {
             ref.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
 //            ref.child(key).child("Email").setValue(email.getText().toString());
             ref.child(key).child("password").setValue(pass.getText().toString());
+            ref.child(key).child("profile_url").setValue("https://firebasestorage.googleapis.com/v0/b/students24by7.appspot.com/o/aizaz_pic.jpg?alt=media&token=8e1a7e81-0dd1-42d2-bfde-6aed919b9648");
             ref.child(key).child("service").child("title").setValue(srvc);
             ref.child(key).child("service").child("service_des").setValue(srvc_des);
+
             ref.child(key).child("service").child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -171,6 +173,8 @@ public class MainActivity extends Activity {
             String key =  email.getText().toString().replace(".", ","); // firebaseDatabase.push().getKey();
             firebaseDatabase.child(key).child("fullname").setValue(fullName.getText().toString());
             firebaseDatabase.child(key).child("mobile_no").setValue(mobileNo.getText().toString());
+            firebaseDatabase.child(key).child("profile_url").setValue("https://firebasestorage.googleapis.com/v0/b/students24by7.appspot.com/o/aizaz_pic.jpg?alt=media&token=8e1a7e81-0dd1-42d2-bfde-6aed919b9648");
+
 //            firebaseDatabase.child(key).child("Email").setValue(email.getText().toString());
             firebaseDatabase.child(key).child("password").setValue(pass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
