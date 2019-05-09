@@ -15,6 +15,6 @@ public class Fragment_sp_profile extends Fragment {
 
         View view = inflater.inflate(R.layout.sp_menu_fragment, container, false);
 
-        return null;
+        return view;
     }
 }

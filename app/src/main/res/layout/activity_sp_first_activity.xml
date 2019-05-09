@@ -6,13 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".Sp_first_activity"
     android:background="#ffff">
+
+
+
     <RelativeLayout
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:id="@+id/relative_sp_first"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
 
         android:background="@drawable/account_managmentbg">
 
@@ -20,11 +23,13 @@
             android:id="@+id/menu_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="15dp"
-            android:scaleType="center"
-            android:onClick="menu_profile_fragment"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:background="@android:color/transparent"
+            android:onClick="menu_profile_fragment"
+            android:scaleType="center"
             android:src="@drawable/menuwhite" />
 
 
@@ -34,7 +39,7 @@
             android:id="@+id/sp_service_pic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="10dp"
@@ -43,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Inactive"
-            android:textSize="30dp"
+            android:textSize="25dp"
             android:textColor="#ffff"
             android:layout_centerInParent="true"/>
 
@@ -60,7 +65,7 @@
         android:text="Rating"
         android:gravity="center"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp"
+        android:textSize="22dp"
         android:layout_marginEnd="100dp"
         android:textStyle="bold"
         android:layout_marginTop="15dp"
@@ -85,7 +90,6 @@
             android:layout_below="@id/linear_name"
             android:layout_width="wrap_content"
             android:layout_height="26dp"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="25dp"
             android:numStars="5"
             android:rating="3"/>
@@ -98,7 +102,7 @@
             android:fontFamily="sans-serif"
             android:text="4"
             android:textColor="#ed8a19"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
@@ -106,7 +110,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="/5"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:textColor="#707070"
             android:layout_marginTop="3dp"
             android:textStyle="bold"/>
@@ -119,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_rating"
         android:text="Reviews"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:layout_marginTop="10dp"
         android:textColor="#707070"
         android:textStyle="bold"
@@ -159,8 +163,8 @@
 
             <com.mikhaellopez.circularimageview.CircularImageView
                 android:id="@+id/review1_img"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:src="@drawable/ic_launcher_background"
                 app:civ_border_color="#EEEEEE"
                 app:civ_border_width="1dp"
@@ -172,476 +176,628 @@
                 />
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp">
                 <TextView
                     android:id="@+id/txtview_review_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
                     android:text="Aaiz Khan"
                     android:textColor="#925AB9"
-                    android:textSize="22dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtview_review_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
+                    android:layout_below="@id/txtview_review_name"
+                    android:text="Good Experience and Fast Service. low cast i reall appricaite this man for his service and recomend them"
                     android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/review1_ratingTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14dp" />
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                    android:id="@+id/review_star"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/starfill_2"
+                    android:layout_alignParentEnd="true"/>
                 <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
+                    android:id="@+id/review1_ratingTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-
-
-            <com.mikhaellopez.circularimageview.CircularImageView
-
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
+                    android:text="5"
+                    android:layout_marginEnd="35dp"
+                    android:textColor="#FF8C00"
+                    android:textSize="20dp"
+                    android:layout_alignParentRight="true"
                     android:textStyle="bold" />
 
-                <TextView
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
+            </RelativeLayout>
+        </LinearLayout>
+            <LinearLayout
 
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
 
 
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
+                    android:layout_marginStart="10dp"
+                    />
 
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
 
 
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
+                    android:layout_marginStart="10dp"
+                    />
 
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
 
 
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="15dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
-
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
-
-            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#95E0E5F1"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
 
 
 
-            <com.mikhaellopez.circularimageview.CircularImageView
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
+                    android:layout_marginStart="10dp"
+                    />
 
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/ic_launcher_background"
-                app:civ_border_color="#EEEEEE"
-                app:civ_border_width="1dp"
-                app:civ_shadow="true"
-                app:civ_shadow_radius="0"
-                android:layout_marginTop="14dp"
-                app:civ_shadow_color="#8BC34A"
-                android:layout_marginStart="10dp"
-                />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
 
 
+                </RelativeLayout>
+            </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
 
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
                     android:layout_marginStart="10dp"
-                    android:text="Aaiz Khan"
-                    android:textColor="#925AB9"
-                    android:textSize="22dp"
-                    android:textStyle="bold" />
+                    />
 
-                <TextView
 
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
+
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
                     android:layout_marginStart="10dp"
-                    android:text="Good Experience and Fast Service"
-                    android:textColor="#707070"
-                    android:textSize="18dp" />
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
+
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
+                    android:layout_marginStart="10dp"
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="#95E0E5F1"
+                android:orientation="horizontal">
+
+
+
+                <com.mikhaellopez.circularimageview.CircularImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_launcher_background"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="1dp"
+                    app:civ_shadow="true"
+                    app:civ_shadow_radius="0"
+                    android:layout_marginTop="14dp"
+                    app:civ_shadow_color="#8BC34A"
+                    android:layout_marginStart="10dp"
+                    />
+
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aaiz Khan"
+                        android:textColor="#925AB9"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Good Experience and Fast Service"
+                        android:textColor="#707070"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="22dp"
+                        android:textSize="14dp" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/starfill_2"
+                        android:layout_alignParentEnd="true"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:layout_marginEnd="35dp"
+                        android:textColor="#FF8C00"
+                        android:textSize="20dp"
+                        android:layout_alignParentRight="true"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+
+
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="4dp"
-                android:text="5"
-                android:textColor="#FF8C00"
-                android:textSize="25dp"
-                android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/starfill_2" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         </LinearLayout>
+
+
     </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/menu_fragment"
+        android:layout_width="260dp"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#fff"
+        android:layout_height="match_parent">
+
+
+        <fragment
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.dcservicez.a247services.Fragment_sp_profile"/>
+    </LinearLayout>
+
+
+
+
 
 </RelativeLayout>
