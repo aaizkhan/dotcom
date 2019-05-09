@@ -195,7 +195,7 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
                     FirebaseDatabase.getInstance().getReference("Users").child(data.getKey().toString()).child("profile_url").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            ;
+
 
                             Log.i("Search_Service",dataSnapshot.getValue().toString());
 
