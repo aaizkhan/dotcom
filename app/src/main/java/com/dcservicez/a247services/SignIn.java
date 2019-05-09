@@ -37,9 +37,6 @@ public class SignIn extends AppCompatActivity {
         prefs=new Prefs(context);
 
         edt_email.setText(prefs.email());
-//        Intent intent=new Intent(SignIn.this,Change_profile_pic.class);
-//        startActivity(intent);
-//        finish();
 
     }
 
@@ -74,13 +71,13 @@ public class SignIn extends AppCompatActivity {
                         prefs.sverc_type(dataSnapshot.child("service").child("title").getValue().toString());
                         new Debug(context).print("you are sp"+dataSnapshot.child("service").getValue().toString());
                         startActivity(new Intent(context,Select_service.class));
-//                        finish();
+                        finish();
 
                     } catch (Exception e) {
                       prefs.sverc_type("");
                         new Debug(context).print("not  sp");
                         startActivity(new Intent(context,Select_service.class));
-//                        finish();
+                        finish();
 
                     }
 
