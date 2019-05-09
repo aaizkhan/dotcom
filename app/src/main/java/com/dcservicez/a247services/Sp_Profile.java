@@ -121,6 +121,7 @@ TextView sp_rating_txtview1;
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
 
                         textView_srvc.setText(dataSnapshot2.child("title").getValue().toString());
+                        Picasso.get().load(dataSnapshot2.child("img_url").getValue().toString()).into(imageView_srvc);
                         Log.i("SP_profile",dataSnapshot2.getValue().toString());
                     }
 

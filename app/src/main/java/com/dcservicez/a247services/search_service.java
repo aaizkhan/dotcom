@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.dcservicez.a247services.Prefs.Prefs;
 import com.dcservicez.a247services.debugs.Debug;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -51,17 +53,23 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     Debug debug;
     Prefs prefs;
     String service_type;
+    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_service);
+        Log.e("GMAP","activity created");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        Log.e("GMAP","mpa fragment set");
         mapFragment.getMapAsync(this);
+
         debug=new Debug(this);
         prefs=new Prefs(this);
+        Log.e("GMAP","prefs set");
+
         if(getIntent()!=null){
             service_type=getIntent().getExtras().getString("service_type");
 
@@ -73,15 +81,22 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
 
     @SuppressLint("MissingPermission")
     private Location getMyLocation() {
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (myLocation == null) {
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_COARSE);
-            String provider = lm.getBestProvider(criteria, true);
-            myLocation = lm.getLastKnownLocation(provider);
+
+        try {
+            LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (myLocation == null) {
+                Criteria criteria = new Criteria();
+                criteria.setAccuracy(Criteria.ACCURACY_COARSE);
+                String provider = lm.getBestProvider(criteria, true);
+                myLocation = lm.getLastKnownLocation(provider);
+            }
+            return myLocation;
+        } catch (Exception e) {
+            Log.e("GMAP",e.toString());
+            e.printStackTrace();
+            return null;
         }
-        return myLocation;
     }
 
 
@@ -97,23 +112,35 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mMap = googleMap;
+        Log.e("GMAP","map ready");
         mMap.getUiSettings().setRotateGesturesEnabled(false);
+
 
         // Add a marker in Sydney and move the camera
 
 //        mMap.getMyLocation();
                 mMap.setMyLocationEnabled(true);
+        Log.e("GMAP","enabled");
 
-
-                Location l=getMyLocation();
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(l.getLatitude(), l.getLongitude()), 11));
-
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(l.getLatitude(), l.getLongitude()))      // Sets the center of the map to location user
-                .zoom(13)                   // Sets the zoom
-                .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                Location l=getMyLocation();
+//            Location l=null;
+//                if(l==null){
+//                    l = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+//
+//                    Log.e("GMAP","null");
+////                    return;
+//                }
+//
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(l.getLatitude(), l.getLongitude()), 11));
+//        Log.e("GMAP","animate camera");
+//        CameraPosition cameraPosition = new CameraPosition.Builder()
+//                .target(new LatLng(l.getLatitude(), l.getLongitude()))      // Sets the center of the map to location user
+//                .zoom(13)                   // Sets the zoom
+//                .build();                   // Creates a CameraPosition from the builder
+//        Log.e("GMAP","animate pos");
+//        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -131,7 +158,17 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
 
         mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
             @Override
-            public void onMyLocationChange(Location location) {
+            public void onMyLocationChange(Location l) {
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(l.getLatitude(), l.getLongitude()), 11));
+                Log.e("GMAP","animate camera");
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(new LatLng(l.getLatitude(), l.getLongitude()))      // Sets the center of the map to location user
+                        .zoom(13)                   // Sets the zoom
+                        .build();                   // Creates a CameraPosition from the builder
+                Log.e("GMAP","animate pos");
+                mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
 //                debug.print("location is changeds "+location.getLongitude()+","+location.getLatitude());
 
 //                Location location=getMyLocation();
@@ -141,7 +178,7 @@ public class search_service extends FragmentActivity implements OnMapReadyCallba
 
 //                mMap.addMarker(new MarkerOptions().position(sydney).title(prefs.sverc_type()));
 
-                update_location(location);
+                update_location(l);
 
             }
         });
