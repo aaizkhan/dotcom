@@ -36,10 +36,10 @@ public class SignIn extends AppCompatActivity {
         dilouges=new Dilouges(context);
         prefs=new Prefs(context);
 
-        edt_email.setText(prefs.email());
-//        Intent intent=new Intent(SignIn.this,Change_profile_pic.class);
-//        startActivity(intent);
-//        finish();
+
+        Intent intent=new Intent(SignIn.this,Customer_menu.class);
+        startActivity(intent);
+        finish();
 
     }
 
@@ -71,18 +71,14 @@ public class SignIn extends AppCompatActivity {
                 if(edt_pass.getText().toString().equals(dataSnapshot.child("password").getValue().toString())){
                     new Debug(context).print("Login success");
                     try {
-                        prefs.sverc_type(dataSnapshot.child("service").child("title").getValue().toString());
+                        prefs.sverc_type(dataSnapshot.child("service").getValue().toString());
                         new Debug(context).print("you are sp"+dataSnapshot.child("service").getValue().toString());
-                        startActivity(new Intent(context,Select_service.class));
-                        finish();
-
                     } catch (Exception e) {
                       prefs.sverc_type("");
                         new Debug(context).print("not  sp");
-                        startActivity(new Intent(context,Select_service.class));
-                        finish();
-
                     }
+                    startActivity(new Intent(context,search_service.class));
+//                    finish();
 
 
                 }else {
