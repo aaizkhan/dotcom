@@ -88,6 +88,7 @@
         android:layout_height="match_parent"
         android:layout_below="@id/relative_viewProfile"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/chat_background"
         android:orientation="vertical">
 
         <ScrollView
@@ -97,7 +98,7 @@
 
         <LinearLayout
             android:id="@+id/msgs_layout"
-            android:background="@drawable/chat_background"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
