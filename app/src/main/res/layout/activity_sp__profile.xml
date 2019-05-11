@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Sp_Profile"
-    android:background="#ffff">
+    android:background="#ffff"
+
+    >
 
 
 
@@ -22,6 +24,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:textColor="@android:color/white"
             android:id="@+id/account_mgt_btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,5 +177,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:onClick="abt_click"
+            android:textColor="@android:color/white"
+            android:background="@drawable/sp_about_btn_back"
+            android:layout_weight="1"
+            android:text="About"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Button
+            android:textColor="@android:color/white"
+
+            android:background="@drawable/sp_contact_btn_back"
+            android:layout_weight="1"
+            android:text="Contact"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </RelativeLayout>
