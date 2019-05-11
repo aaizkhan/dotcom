@@ -150,6 +150,7 @@ public class MainActivity extends Activity {
             ref.child(key).child("profile_url").setValue("https://firebasestorage.googleapis.com/v0/b/students24by7.appspot.com/o/aizaz_pic.jpg?alt=media&token=8e1a7e81-0dd1-42d2-bfde-6aed919b9648");
             ref.child(key).child("service").child("title").setValue(srvc);
             ref.child(key).child("service").child("service_des").setValue(srvc_des);
+            ref.child(key).child("service").child("active").setValue(true);
 
             ref.child(key).child("service").child("service_exp").setValue(srvc_exp).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
