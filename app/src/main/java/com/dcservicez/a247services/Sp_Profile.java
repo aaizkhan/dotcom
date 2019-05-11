@@ -50,6 +50,12 @@ public class Sp_Profile extends AppCompatActivity {
 TextView sp_rating_txtview1;
 
 
+public void abt_click(View view){
+    Intent i=new Intent(this,about_sp_profile.class);
+    i.putExtra("user_id",getIntent().getExtras().getString("user_id"));
+    startActivity(i);
+}
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
