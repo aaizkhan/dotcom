@@ -37,9 +37,9 @@ public class SignIn extends AppCompatActivity {
         prefs=new Prefs(context);
 
         edt_email.setText(prefs.email());
-
-        Intent intent=new Intent(SignIn.this,Chat_activity.class);
-        startActivity(intent);
+//        Intent intent=new Intent(SignIn.this,Change_profile_pic.class);
+//        startActivity(intent);
+//        finish();
 
     }
 

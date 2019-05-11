@@ -7,8 +7,11 @@
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--<uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />-->
+
 
     <application
         android:allowBackup="true"
@@ -17,8 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Chat_activity"></activity>
-        <activity android:name=".Sp_first_activity" />
+        <activity android:name=".Sp_first_activity"></activity>
         <activity android:name=".Customer_menu" />
         <activity android:name=".Sp_Profile" />
         <activity android:name=".Change_profile_pic" />
