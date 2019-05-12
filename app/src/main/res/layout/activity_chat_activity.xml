@@ -24,7 +24,6 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:background="@android:color/transparent"
-            android:onClick="menu_profile_fragment"
             android:scaleType="center"
             android:src="@drawable/menuwhite" />
     </LinearLayout>
