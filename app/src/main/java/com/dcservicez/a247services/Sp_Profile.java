@@ -22,6 +22,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.dcservicez.a247services.Adopters.Services_Adopter;
+import com.dcservicez.a247services.objects.Chat_Itm;
 import com.dcservicez.a247services.objects.Review_item;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,6 +49,8 @@ public class Sp_Profile extends AppCompatActivity {
 
     RatingBar ratingBar;
 TextView sp_rating_txtview1;
+
+
 
 
 public void abt_click(View view){
@@ -176,6 +179,12 @@ public void abt_click(View view){
 
     public void btnBack_account_mgt(View view) {
         finish();
+    }
+    public void contact_clicked(View view) {
+        String id=getIntent().getExtras().getString("user_id");
+        Intent intent=new Intent(this, Chat_activity.class);
+        intent.putExtra("user_id",id);
+        startActivity(intent);
     }
 
 

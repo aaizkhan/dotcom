@@ -18,8 +18,16 @@ public class Prefs {
     public void sverc_type(String s){
         sharedPref.edit().putString("sverc_type",s).apply();
     }
+
+    public void task_id(String s){
+        sharedPref.edit().putString("task_id",s).apply();
+    }
+
     public String sverc_type(){
         return  sharedPref.getString("sverc_type","");
+    }
+    public String task_id(){
+        return  sharedPref.getString("task_id","");
     }
 
     public void email(String s){

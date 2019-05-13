@@ -2,6 +2,7 @@ package com.dcservicez.a247services;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,9 +10,11 @@ import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,6 +31,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -39,6 +43,7 @@ import com.dcservicez.a247services.objects.Review_item;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,6 +62,7 @@ public class SP_Main_Acitvity extends AppCompatActivity
     Context context;
 
     private FusedLocationProviderClient fusedLocationClient;
+    Button button;
 
 
     @Override
@@ -65,6 +71,104 @@ public class SP_Main_Acitvity extends AppCompatActivity
         setContentView(R.layout.activity_sp__main__acitvity);
         prefs = new Prefs(this);
         context = this;
+        button=(Button)findViewById(R.id.sp_main_btn);
+
+        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull final DataSnapshot dataSnapshot, @Nullable String s) {
+                int status=Integer.parseInt(dataSnapshot.child("status").getValue().toString());
+
+
+                        if(status==0){
+                            AlertDialog alertDialog=new AlertDialog.Builder(context)
+                                    .setTitle("New Task")
+                                    .setMessage("Do you accpet this task?")
+                                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(-1);//rejected
+                                        }
+                                    })
+                                    .setCancelable(false)
+                                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(1);//accpted
+                                            FirebaseDatabase.getInstance().getReference("Users").child(dataSnapshot.child("id").getValue().toString()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(1);//accpted
+                                            button.setVisibility(View.VISIBLE);
+                                        }
+                                    }).create();
+                            alertDialog.show();
+                        }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull final DataSnapshot dataSnapshot, @Nullable String s) {
+                int status=Integer.parseInt(dataSnapshot.child("status").getValue().toString());
+
+
+                if(status==7){
+                    button.setVisibility(View.VISIBLE);
+                    button.setText("Collected Payment");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            button.setVisibility(View.GONE);
+                            FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(8);//accpted
+                            FirebaseDatabase.getInstance().getReference("Users").child(dataSnapshot.child("id").getValue().toString()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(8);//accpted
+
+                        }
+                    });}
+
+
+
+                if(status==3){
+                    button.setVisibility(View.VISIBLE);
+                    button.setText("Im arrived");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(4);//accpted
+                            FirebaseDatabase.getInstance().getReference("Users").child(dataSnapshot.child("id").getValue().toString()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(4);//accpted
+
+                        }
+                    });
+
+
+
+
+
+            }
+
+                if(status==5){
+                    button.setText("I have completed my task");
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(6);//accpted
+                            FirebaseDatabase.getInstance().getReference("Users").child(dataSnapshot.child("id").getValue().toString()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(6);//accpted
+
+                        }
+                    });}
+
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -145,6 +249,7 @@ public class SP_Main_Acitvity extends AppCompatActivity
                 float rate=(float)rate_avg/count;
 
                 TextView sp_rating_txtview1=(TextView)findViewById(R.id.sp_rating_txtview1);
+
                 sp_rating_txtview1.setText(rate+"");
                 RatingBar ratingBar=(RatingBar)findViewById(R.id.sp_ratingbar);
                 ratingBar.setRating(rate);
@@ -181,6 +286,7 @@ public class SP_Main_Acitvity extends AppCompatActivity
 
                     }
                 });
+
 
                 TextView textView_namme=(TextView)findViewById(R.id.nav_heder_name);
 
@@ -263,7 +369,9 @@ public class SP_Main_Acitvity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_profile) {
+        if(id==R.id.nav_home){
+            startActivity(new Intent(this,Chat_Conversations.class));
+        } else if (id == R.id.nav_profile) {
             // Handle the camera action
             startActivity(new Intent(this,Change_profile_pic.class));
 

@@ -5,127 +5,127 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.view.MenuItem;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.dcservicez.a247services.Adopters.Chat_Adopter;
+import com.dcservicez.a247services.Adopters.Services_Adopter;
 import com.dcservicez.a247services.Prefs.Prefs;
-import com.dcservicez.a247services.objects.Chat_Itm;
+import com.dcservicez.a247services.objects.Review_item;
+import com.dcservicez.a247services.objects.Service;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Timer;
 
-public class Chat_activity extends AppCompatActivity {
+public class Customer_Main extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
 
-    final ArrayList<Chat_Itm> chat_itms=new ArrayList<>();
-     String id="vovokhan@gmail,com";
-     Context context;
+
+    ArrayList<Service> services=new ArrayList<>();
+    ArrayList<Service> services_Filter=new ArrayList<>();
+    Context context;
+    RecyclerView recyclerView;
+
+    EditText edt_search;
+    Services_Adopter adopter;
 
     Prefs prefs;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_activity);
+        setContentView(R.layout.activity_customer__main);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, null, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
         prefs=new Prefs(this);
         context=this;
-        id=getIntent().getExtras().getString("user_id");
-
-//            chat_itms.add(new Chat_Itm("helloo",5454,0));
-//            chat_itms.add(new Chat_Itm("??",5454,0));
-//            chat_itms.add(new Chat_Itm("yes",5454,1));
+        recyclerView=(RecyclerView)findViewById(R.id.service_select_recyclerView);
+        edt_search=(EditText)findViewById(R.id.select_service_searrch_edt);
 
 
-
-        check_task_status();
-
-        final Chat_Adopter adopter=new Chat_Adopter(chat_itms,this);
-        final RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view_chat);
-
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
-        linearLayoutManager.setReverseLayout(false);
-        linearLayoutManager.setStackFromEnd(true);
-        linearLayoutManager.setSmoothScrollbarEnabled(true);
-        recyclerView.setAdapter(adopter);
-
-        recyclerView.setLayoutManager(linearLayoutManager);
+//        check_task_status();
 
 
-        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("messages").child(id).addChildEventListener(new ChildEventListener() {
+
+        edt_search.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot data, @Nullable String s) {
-
-
-                      try {
-//                          Thread.sleep(1000);
-                          Chat_Itm chatItm=new Chat_Itm(data.child("msg").getValue().toString(),System.currentTimeMillis(),Integer.parseInt(data.child("msg_type").getValue().toString()));
-                          chat_itms.add(chatItm);
-                          adopter.notifyDataSetChanged();
-                          recyclerView.scrollToPosition(chat_itms.size()-1);
-                      }catch (Exception e){
-//                          Log.e("chat",e.toString());
-                      }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(!charSequence.toString().isEmpty()){
+                    search_service(charSequence.toString());
+                    adopter.notifyDataSetChanged();
+                }else {
+                    services_Filter.clear();
+                    services_Filter.addAll(services);
+                    try {
+                        adopter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void afterTextChanged(Editable editable) {
 
             }
         });
 
-        FirebaseDatabase.getInstance().getReference("Users").child(id).addValueEventListener(new ValueEventListener() {
+
+        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull final DataSnapshot dataSnapshot) {
 
-                TextView textView_namme=(TextView)findViewById(R.id.chat_txt_name);
-//                    chat_itms.clear();
-//                for (DataSnapshot data:dataSnapshot.child("messages").child(id).getChildren()) {
-//
-//                        Chat_Itm chatItm=new Chat_Itm(data.child("msg").getValue().toString(),System.currentTimeMillis(),Integer.parseInt(data.child("msg_type").getValue().toString()));
-//                        chat_itms.add(chatItm);
-//
-//                }
-//                adopter.notifyDataSetChanged();
+                TextView textView_namme=(TextView)findViewById(R.id.nav_heder_name);
+
 
                 textView_namme.setText(dataSnapshot.child("fullname").getValue().toString().toUpperCase());
                 Picasso.get().load(dataSnapshot.child("profile_url").getValue().toString()).into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
-                        ImageView img_profile=(ImageView)findViewById(R.id.sp_image);
+                        ImageView img_profile=(ImageView)findViewById(R.id.nav_heder_profilePic);
 
                         img_profile.setImageBitmap(bitmap);
                     }
@@ -149,82 +149,36 @@ public class Chat_activity extends AppCompatActivity {
             }
         });
 
-    }
-
-    public void sent_sms(View view){
-        EditText editText=(EditText)findViewById(R.id.edt_type_message) ;
-        if(!editText.getText().toString().isEmpty()){
-            sent_sms(id,editText.getText().toString(),view,editText);
-//            editText.setEnabled(false);
-//            view.setEnabled(false);
-        }
-
-    }
-
-    public void sent_sms(String id,String msg,View view,EditText view1){
-        long t= System.currentTimeMillis();
-
-        view1.setEnabled(true);
-        view.setEnabled(true);
-        view1.setText("");
-        FirebaseDatabase.getInstance().getReference("Users").child(id).child("messages").child(prefs.email()).child("info").setValue(new Conversation(msg));
-        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("messages").child(id).child("info").setValue(new Conversation(msg));
-        Chat_Itm chatItm=new Chat_Itm(msg,System.currentTimeMillis(),0);
-        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("messages").child(id).child(t+"").setValue(chatItm);
-//        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("messages").child(id).child(t+"").child("msg_type").setValue(0);
-//        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("messages").child(id).child(t+"").child("msg_time").setValue(ServerValue.TIMESTAMP);
-        chatItm=new Chat_Itm(msg,System.currentTimeMillis(),1);
-        FirebaseDatabase.getInstance().getReference("Users").child(id).child("messages").child(prefs.email()).child(t+"").setValue(chatItm);
 
 
 
 
-//        FirebaseDatabase.getInstance().getReference("Users").child(id).child("messages").child(prefs.email()).child(t+"").child("msg").setValue(msg);
-//        FirebaseDatabase.getInstance().getReference("Users").child(id).child("messages").child(prefs.email()).child(t+"").child("msg_type").setValue(1);
-//        FirebaseDatabase.getInstance().getReference("Users").child(id).child("messages").child(prefs.email()).child(t+"").child("msg_time").setValue(ServerValue.TIMESTAMP);
 
 
-    }
 
-    public void  menu_profile_fragment(final View view){
-        AlertDialog alertDialog=new AlertDialog.Builder(this)
-                .setTitle("Hireing for task")
-                .setMessage("Are you sure want to hire this person for task?")
-                .setNegativeButton("No",null)
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        long t=System.currentTimeMillis();
 
-                        FirebaseDatabase.getInstance().getReference("Users").child(id).child("tasks").child(""+t).setValue(new Task(prefs.email()));
-                        FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(""+t).setValue(new Task(id));
+        FirebaseDatabase.getInstance().getReference("app_config").child("services").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    }
-                }).create();
 
-        alertDialog.show();
-    }
+                for (DataSnapshot data:dataSnapshot.getChildren()) {
+                    Service service=new Service(data.child("title").getValue().toString(),data.child("img_url").getValue().toString(),Integer.parseInt(data.child("color").getValue().toString()),data.getKey().toString());
+                    services.add(service);
+                    services_Filter.add(service);
+                }
+                update_recyler_view();
 
-    class Conversation {
-       public long time=System.currentTimeMillis();
-        public  String last_msg;
-        public boolean isread=false;
 
-        public Conversation(String last_msg) {
-            this.last_msg = last_msg;
-        }
-    }
+                Log.i("service24/7_Adopter","got services"+services.size());
+            }
 
-    class Task {
-        public long time=System.currentTimeMillis();
-        public  String id=prefs.email();
-      public   int status=0;
-//0 new 1 accpeted 2 rejected 3 arrived 4 completed
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.i("service24/7_Adopter","got services"+databaseError.toString());
+            }
+        });
 
-        public Task(String id) {
-            this.id = id;
-        }
     }
 
     public void check_task_status() {
@@ -248,9 +202,9 @@ public class Chat_activity extends AppCompatActivity {
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     FirebaseDatabase.getInstance().getReference("Users").child(prefs.email()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(10);//accpted
                                     FirebaseDatabase.getInstance().getReference("Users").child(dataSnapshot.child("id").getValue().toString()).child("tasks").child(dataSnapshot.getKey()).child("status").setValue(10);//accpted
-                                    Intent intent=new Intent(context, Reviw_User.class);
-                                    intent.putExtra("user_id",dataSnapshot.child("id").getValue().toString());
-                                    startActivity(intent);
+                                        Intent intent=new Intent(context, Reviw_User.class);
+                                        intent.putExtra("user_id",dataSnapshot.child("id").getValue().toString());
+                                        startActivity(intent);
                                 }
                             }).create();
                     alertDialog.show();
@@ -319,5 +273,61 @@ public class Chat_activity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_profile) {
+            // Handle the camera action
+            startActivity(new Intent(this,Change_profile_pic.class));
+        } else if (id == R.id.nav_home) {
+
+            startActivity(new Intent(this,Chat_Conversations.class));
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_tools) {
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    public void update_recyler_view() {
+
+        adopter=new Services_Adopter(services_Filter, Customer_Main.this);
+        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false);
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(context,2) ;
+        recyclerView.setAdapter(adopter);
+        recyclerView.setLayoutManager(gridLayoutManager);
+    }
+
+    public void search_service(String q){
+        services_Filter.clear();
+        for (Service s:services) {
+            if(s.getTitle().toLowerCase().contains(q.toLowerCase())){
+                services_Filter.add(s);
+            }
+        }
+
     }
 }
